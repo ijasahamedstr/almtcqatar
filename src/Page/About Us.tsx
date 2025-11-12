@@ -1,5 +1,28 @@
 import React from "react";
-import { Box, Breadcrumbs, Link, Typography } from "@mui/material";
+import {
+  Box,
+  Breadcrumbs,
+  Link,
+  Typography,
+  Container,
+} from "@mui/material";
+
+const managementMembers = [
+  {
+    name: "Dr. John Smith",
+    title: "Chief Academic Officer",
+    image:
+      "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?auto=format&fit=crop&w=800&q=80",
+    bio: "Oversees academic programs and drives innovation in teaching and learning.",
+  },
+  {
+    name: "Ms. Sarah Johnson",
+    title: "Director of Student Affairs",
+    image:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80",
+    bio: "Ensures student engagement and fosters a vibrant campus community.",
+  },
+];
 
 const Aboutus: React.FC = () => {
   return (
@@ -89,7 +112,10 @@ const Aboutus: React.FC = () => {
               mb: 2,
             }}
           >
-            Al Mubthadieen Trading & Contracting (MTC) is a prestigious interior decoration company distinguished by refined craftsmanship, artistic excellence, and collaboration with some of the most renowned interior architects in the region.
+            Al Mubthadieen Trading & Contracting (MTC) is a prestigious interior
+            decoration company distinguished by refined craftsmanship, artistic
+            excellence, and collaboration with some of the most renowned
+            interior architects in the region.
           </Typography>
 
           <Typography
@@ -101,7 +127,9 @@ const Aboutus: React.FC = () => {
               mb: 2,
             }}
           >
-            With years of experience and a passion for perfection, MTC has become synonymous with quality, creativity, and timeless elegance in interior design and decorative finishes.
+            With years of experience and a passion for perfection, MTC has
+            become synonymous with quality, creativity, and timeless elegance in
+            interior design and decorative finishes.
           </Typography>
 
           <Typography
@@ -112,9 +140,14 @@ const Aboutus: React.FC = () => {
               fontFamily: "'Montserrat', sans-serif",
             }}
           >
-            Al Mubthadieen Trading & Contracting, Qatar executes high-end interior projects for private clients, boutiques, luxury hotels, and unique restaurants.Thanks to our extensive experience and French know-how, we cultivate a special and unique relationship with our clients, built on listening, trust, rigor, and exceptional craftsmanship.
-
-          Being established in the Middle East allows us to provide flexibility, responsiveness, and strong support throughout the region.
+            Al Mubthadieen Trading & Contracting, Qatar executes high-end
+            interior projects for private clients, boutiques, luxury hotels, and
+            unique restaurants. Thanks to our extensive experience and French
+            know-how, we cultivate a special and unique relationship with our
+            clients, built on listening, trust, rigor, and exceptional
+            craftsmanship. Being established in the Middle East allows us to
+            provide flexibility, responsiveness, and strong support throughout
+            the region.
           </Typography>
         </Box>
 
@@ -177,8 +210,114 @@ const Aboutus: React.FC = () => {
           />
         </Box>
       </Box>
-      
-      
+
+      {/* ✅ Management Members (Flex Instead of Grid) */}
+      <Container
+        maxWidth="lg"
+        sx={{
+          position: "relative",
+          zIndex: 1,
+          justifyContent: "center",
+          pb: 10,
+        }}
+      >
+        <Typography
+          variant="h6"
+          align="center"
+          sx={{
+            color: "text.secondary",
+            mb: 1,
+            fontWeight: 500,
+            fontFamily: "'Montserrat', sans-serif",
+            letterSpacing: 1,
+          }}
+        >
+          Management Members
+        </Typography>
+        <Typography
+          variant="h4"
+          align="center"
+          sx={{
+            fontWeight: 700,
+            mb: 6,
+            color: "#5b1c31",
+            fontFamily: "'Montserrat', sans-serif",
+          }}
+        >
+          Where Vision Meets Leadership
+        </Typography>
+
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: 4,
+          }}
+        >
+          {managementMembers.map((member, index) => (
+            <Box
+              key={index}
+              sx={{
+                textAlign: "center",
+                p: 3,
+                borderRadius: 3,
+                transition: "transform 0.3s ease",
+                width: { xs: "100%", sm: "45%", md: "30%", lg: "23%" },
+                "&:hover": {
+                  transform: "translateY(-6px)",
+                },
+              }}
+            >
+              <Box
+                component="img"
+                src={member.image}
+                alt={member.name}
+                sx={{
+                  width: 220,
+                  height: 220,
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  mx: "auto",
+                  mb: 2,
+                  boxShadow: 3,
+                }}
+              />
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  fontWeight: 700,
+                  mb: 1,
+                  fontFamily: "'Montserrat', sans-serif",
+                }}
+              >
+                {member.name}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{
+                  color: "text.secondary",
+                  mb: 1,
+                  fontFamily: "'Montserrat', sans-serif",
+                }}
+              >
+                {member.title}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{
+                  color: "text.secondary",
+                  fontFamily: "'Montserrat', sans-serif",
+                  maxWidth: 280,
+                  mx: "auto",
+                }}
+              >
+                {member.bio}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+      </Container>
     </>
   );
 };
