@@ -2,17 +2,6 @@ import React from "react";
 import { Box, Breadcrumbs, Link, Typography } from "@mui/material";
 
 const Aboutus: React.FC = () => {
-  const values = [
-  { title: "Excellence", image: "/path-to-icons/excellence.svg" },
-  { title: "Creativity", image: "/path-to-icons/creativity.svg" },
-  { title: "Integrity", image: "/path-to-icons/integrity.svg" },
-  { title: "Innovation", image: "/path-to-icons/innovation.svg" },
-  { title: "Client Focus", image: "/path-to-icons/client-focus.svg" },
-  { title: "Craftsmanship", image: "/path-to-icons/craftsmanship.svg" },
-  { title: "Sustainability", image: "/path-to-icons/sustainability.svg" },
-  { title: "Collaboration", image: "/path-to-icons/collaboration.svg" },
-];
-
   return (
     <>
       {/* ✅ Header Banner */}
@@ -188,8 +177,6 @@ const Aboutus: React.FC = () => {
           />
         </Box>
       </Box>
-
-      {/* ✅ Our Values Section */}
       
       
     </>
