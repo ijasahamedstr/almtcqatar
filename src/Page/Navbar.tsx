@@ -29,10 +29,10 @@ import EmailIcon from '@mui/icons-material/Email';
 const pages = [
   { label: 'Home', path: '/' },
   { label: 'About Us', path: '/about-us' },
-  { label: 'Contact Us', path: '/contact-us' },
-  { label: 'Gallery', path: '/gallery' },
   { label: 'Project', path: '/project' },
   { label: 'Portfolio', path: '/portfolio' },
+  { label: 'Contact Us', path: '/contact-us' },
+ 
 ];
 
 /* --- Styled Search --- */
