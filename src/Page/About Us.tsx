@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Breadcrumbs,
-  Link,
-  Typography,
-  Container,
-} from "@mui/material";
+import { Box, Breadcrumbs, Link, Typography, Container } from "@mui/material";
 
 const managementMembers = [
   {
@@ -27,14 +21,13 @@ const managementMembers = [
 const Aboutus: React.FC = () => {
   return (
     <>
-      {/* ✅ Header Banner */}
+      {/* ✅ Header Banner (Fixed Height for All Screens) */}
       <Box
         component="img"
         src="https://i.ibb.co/sp6c4m7f/Gemini-Generated-Image-8rjw9x8rjw9x8rjw-1.webp"
         alt="About Us Banner"
         sx={{
           width: "100%",
-          height: { xs: "220px", md: "400px" },
           objectFit: "cover",
         }}
       />
@@ -101,7 +94,7 @@ const Aboutus: React.FC = () => {
           gap: 6,
         }}
       >
-        {/* ✅ Left Text */}
+        {/* Left Text */}
         <Box sx={{ flex: 1 }}>
           <Typography
             sx={{
@@ -151,7 +144,7 @@ const Aboutus: React.FC = () => {
           </Typography>
         </Box>
 
-        {/* ✅ Right Side Image Collage */}
+        {/* Right Side Image Collage */}
         <Box
           sx={{
             flex: 1,
@@ -162,6 +155,7 @@ const Aboutus: React.FC = () => {
             mt: { xs: 4, md: 0 },
           }}
         >
+          {/* Decorative Dots - Only XL */}
           <Box
             sx={{
               display: { xs: "none", xl: "block" },
@@ -179,6 +173,7 @@ const Aboutus: React.FC = () => {
             }}
           />
 
+          {/* Background Image - Only XL */}
           <Box
             component="img"
             src="https://i.ibb.co/7dw3xSDY/expertise-complex-joinery-work-1-1-2048x1536-jpg.webp"
@@ -195,6 +190,7 @@ const Aboutus: React.FC = () => {
             }}
           />
 
+          {/* Main Image */}
           <Box
             component="img"
             src="https://i.ibb.co/v6VsQkZ0/p22-Gait-Lyrique-2.webp"
@@ -211,7 +207,7 @@ const Aboutus: React.FC = () => {
         </Box>
       </Box>
 
-      {/* ✅ Management Members (Flex Instead of Grid) */}
+      {/* ✅ Management Members */}
       <Container
         maxWidth="lg"
         sx={{

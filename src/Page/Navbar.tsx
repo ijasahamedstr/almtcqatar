@@ -28,9 +28,9 @@ import EmailIcon from '@mui/icons-material/Email';
 /* --- Pages --- */
 const pages = [
   { label: 'Home', path: '/' },
-  { label: 'About Us', path: '/about-us' },
+  { label: 'Portfolio', path: '/Portfolio' },
   { label: 'Project', path: '/project' },
-  { label: 'Portfolio', path: '/portfolio' },
+  { label: 'Expertise', path: '/Expertise' },
   { label: 'Contact Us', path: '/contact-us' },
  
 ];
@@ -98,7 +98,6 @@ export default function Navbar() {
       sx={{
         backgroundColor: '#D0D3D4',
         color: 'black',
-        boxShadow: 'none',
         transition: 'margin-top 0.3s ease',
         marginTop: marginTopValue,
         width: '100%',
@@ -111,7 +110,7 @@ export default function Navbar() {
           <Box component={Link} to="/" sx={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
             <Box
               component="img"
-              src="https://i.ibb.co/Yv4Dghr/Gemini-Generated-Image-pua0mbpua0mbpua0-removebg-preview.png"
+              src="https://i.ibb.co/yn0gbKdZ/Gemini-Generated-Image-pua0mbpua0mbpua0-removebg-preview.png"
               alt="Logo"
               sx={{ maxHeight: { xs: 60, sm: 80, md: 100 }, width: 'auto' }}
             />

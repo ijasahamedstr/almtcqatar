@@ -1,15 +1,11 @@
 import About from "./About";
-import Guidance from "./Guidance";
-import Slider from "./Slider";
-import Testimonials from "./Testimonials";
+import Expertise from "./Expertise";
 
 const Home: React.FC = () => {
   return (
     <>
-    <Slider/>
     <About/>
-    <Testimonials/>
-    <Guidance/>
+    <Expertise/>
     </>
   );
 };

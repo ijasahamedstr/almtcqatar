@@ -25,7 +25,7 @@ const About: React.FC = () => {
           backgroundRepeat: "no-repeat",
           position: "relative",
           overflow: "hidden",
-          mt: { xs: 6, md: 10, lg: 14 },
+          mt: 0, // ✅ Top space removed
         }}
       >
         <Box
@@ -144,7 +144,7 @@ const About: React.FC = () => {
                       width: { xs: 90, sm: 110, md: 150 },
                       height: { xs: 90, sm: 110, md: 150 },
                       borderRadius: "50%",
-                      background: "#5b1c31", // ✅ Custom color applied
+                      background: "#5b1c31",
                       color: "#fff",
                       display: "flex",
                       alignItems: "center",
@@ -169,7 +169,7 @@ const About: React.FC = () => {
                       fontSize: { xs: "0.6rem", sm: "0.85rem", md: "1.1rem" },
                       fontWeight: 500,
                       textAlign: "center",
-                      background: "linear-gradient(135deg, #5b1c31, #8b2a46)", // ✅ Label gradient matches custom color
+                      background: "linear-gradient(135deg, #5b1c31, #8b2a46)",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
                       fontFamily: '"Montserrat", sans-serif',
