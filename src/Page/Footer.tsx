@@ -7,7 +7,7 @@ import {
   IconButton,
   Divider,
 } from "@mui/material";
-import { Facebook, Instagram, WhatsApp, Email, Phone } from "@mui/icons-material";
+import { Facebook, Instagram, Email, Phone } from "@mui/icons-material";
 
 const Footer: React.FC = () => {
   return (
