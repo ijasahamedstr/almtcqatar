@@ -6,5 +6,6 @@ declare module "rellax";
 declare module "aos";
 declare module "Masonry";
 declare module "react-masonry-css";
+declare module "framer-motion";
 
 

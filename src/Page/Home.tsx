@@ -1,4 +1,5 @@
 import About from "./About";
+import Clients from "./Clients";
 import Expertise from "./Expertise";
 
 const Home: React.FC = () => {
@@ -6,6 +7,7 @@ const Home: React.FC = () => {
     <>
     <About/>
     <Expertise/>
+    <Clients/>
     </>
   );
 };
