@@ -165,7 +165,7 @@ export default function Navbar() {
             <Box sx={{ display: 'flex', justifyContent: 'center', mb: 1 }}>
               <Box component={Link} to="/" onClick={handleDrawerToggle}>
                 <img
-                  src="https://i.ibb.co/Yv4Dghr/Gemini-Generated-Image-pua0mbpua0mbpua0-removebg-preview.png"
+                  src="https://i.ibb.co/yn0gbKdZ/Gemini-Generated-Image-pua0mbpua0mbpua0-removebg-preview.png"
                   alt="Logo"
                   style={{ maxHeight: 80, width: 'auto' }}
                 />
