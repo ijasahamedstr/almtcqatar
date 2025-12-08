@@ -4,7 +4,6 @@ import React from "react";
 import { Box, Container, Typography, Button } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
-
 import "swiper/css";
 
 // ✅ import your projects data (shared)
