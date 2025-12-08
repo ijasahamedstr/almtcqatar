@@ -1,10 +1,14 @@
+// src/sections/ProjectsSlider.tsx
+
 import React from "react";
 import { Box, Container, Typography, Button } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 
-// ✅ Swiper CSS (only this is needed)
 import "swiper/css";
+
+// ✅ import your projects data
+import { projectsData } from "./projectsData"; // adjust path if needed
 
 // 🔹 Simple fade-in-up animation helper
 const fadeInUp = (delay = 0) => ({
@@ -18,51 +22,8 @@ const fadeInUp = (delay = 0) => ({
   },
 });
 
-// ✅ Your data
-const products1 = [
-  {
-    id: 1,
-    imageUrl:
-      "https://maisonrandf.com/wp-content/uploads/2023/04/Durat-Lobby-19.jpg.avif",
-    link: "/Web-Media-Video",
-    title: "Design & Project Management",
-  },
-  {
-    id: 2,
-    imageUrl:
-      "https://maisonrandf.com/wp-content/uploads/2023/04/Expertise_customized-furniture-_1__1-1536x2048.jpg.webp",
-    link: "/vr-videos",
-    title: "Furniture",
-  },
-  {
-    id: 3,
-    imageUrl:
-      "https://maisonrandf.com/wp-content/uploads/2023/04/Expertise_curtaining.jpg.avif",
-    link: "/Web-Media-photo",
-    title: "Curtaining & upholstery",
-  },
-  {
-    id: 4,
-    imageUrl:
-      "https://maisonrandf.com/wp-content/uploads/2023/04/expertise_complex-joinery-work-_1__1-2048x1536.jpg.webp",
-    link: "/Motion-graphics",
-    title: "Joinery work",
-  },
-  {
-    id: 5,
-    imageUrl:
-      "https://maisonrandf.com/wp-content/uploads/2023/04/Expertise_special-finishes-min-1147x2048.jpg.webp",
-    link: "/AIVideos",
-    title: "Special finishes",
-  },
-  {
-    id: 6,
-    imageUrl:
-      "https://maisonrandf.com/wp-content/uploads/2023/04/Expertise_Straw-marquetry-min-1147x2048.jpg.webp",
-    link: "/3D-Animation",
-    title: "Straw marquetry",
-  },
-];
+// 🔹 Use first few projects from projectsData (or all if you want)
+const sliderProjects = projectsData.slice(0, 6);
 
 const ProjectsSlider: React.FC = () => {
   return (
@@ -205,12 +166,12 @@ const ProjectsSlider: React.FC = () => {
             modules={[Autoplay, Navigation]}
             style={{ paddingBottom: "20px" }}
           >
-            {products1.map((item) => (
-              <SwiperSlide key={item.id}>
-                {/* Clickable card */}
+            {sliderProjects.map((project) => (
+              <SwiperSlide key={project.slug}>
+                {/* Clickable card going to /projects/:slug */}
                 <Box
                   component="a"
-                  href={item.link}
+                  href={`/projects/${project.slug}`}
                   sx={{
                     textDecoration: "none",
                     color: "#fff",
@@ -237,8 +198,8 @@ const ProjectsSlider: React.FC = () => {
                     {/* Image */}
                     <Box
                       component="img"
-                      src={item.imageUrl}
-                      alt={item.title}
+                      src={project.img}
+                      alt={project.title}
                       sx={{
                         width: "100%",
                         height: "100%",
@@ -253,17 +214,17 @@ const ProjectsSlider: React.FC = () => {
 
                     {/* Dark Overlay */}
                     <Box
-                      className="card-overlay"
                       sx={{
                         position: "absolute",
                         inset: 0,
                         background:
                           "linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.35))",
-                        transition: "background 0.5s ease, opacity 0.5s ease",
+                        transition:
+                          "background 0.5s ease, opacity 0.5s ease",
                       }}
                     />
 
-                    {/* Border glow on hover */}
+                    {/* Border glow */}
                     <Box
                       sx={{
                         position: "absolute",
@@ -292,7 +253,7 @@ const ProjectsSlider: React.FC = () => {
                           fontFamily: "'Montserrat', sans-serif",
                         }}
                       >
-                        {item.title}
+                        {project.title}
                       </Typography>
                     </Box>
                   </Box>
@@ -322,6 +283,7 @@ const ProjectsSlider: React.FC = () => {
               borderColor: "#fff",
             },
           }}
+          href="/project"
         >
           View All Projects
         </Button>

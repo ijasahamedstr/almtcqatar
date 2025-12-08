@@ -82,6 +82,46 @@ const rawProjects: Omit<Project, "slug">[] = [
       "https://maisonrandf.com/wp-content/uploads/2023/04/Durat-Lounge-1536x2048.jpg.webp",
     ],
   },
+   {
+    title: "Najd Artwork",
+    img: "https://maisonrandf.com/wp-content/uploads/2023/06/Najd-Artwork.jpg.avif",
+    description:
+      "Custom artwork inspired by Najd heritage, blending contemporary aesthetics with traditional motifs.",
+    amount: "SAR 90,000",
+    gallery: [
+      "https://maisonrandf.com/wp-content/uploads/2023/06/Najd-Artwork.jpg.avif",
+    ],
+  },
+  {
+    title: "Hotel restaurant refurbishment",
+    img: "https://maisonrandf.com/wp-content/uploads/2023/04/photo-principale-du-projet-min-1536x2048.jpg.webp",
+    description:
+      "Full refurbishment of a hotel restaurant including finishes, lighting, and bespoke furniture elements.",
+    amount: "SAR 480,000",
+    gallery: [
+      "https://maisonrandf.com/wp-content/uploads/2023/04/photo-principale-du-projet-min-1536x2048.jpg.webp",
+    ],
+  },
+  {
+    title: "Private Palace",
+    img: "https://maisonrandf.com/wp-content/uploads/2023/05/Qatar_decorative_paint-50.jpg.avif",
+    description:
+      "High-end decorative paint and finishes for a private palace, with focus on luxury and fine detailing.",
+    amount: "SAR 1,200,000",
+    gallery: [
+      "https://maisonrandf.com/wp-content/uploads/2023/05/Qatar_decorative_paint-50.jpg.avif",
+    ],
+  },
+  {
+    title: "Hotel lounge refurbishment",
+    img: "https://maisonrandf.com/wp-content/uploads/2023/04/Durat-Lounge-1536x2048.jpg.webp",
+    description:
+      "Refurbishment of a hotel lounge area, creating a warm and inviting atmosphere for guests.",
+    amount: "SAR 350,000",
+    gallery: [
+      "https://maisonrandf.com/wp-content/uploads/2023/04/Durat-Lounge-1536x2048.jpg.webp",
+    ],
+  },
 ];
 
 // --- Final Data with slug ---

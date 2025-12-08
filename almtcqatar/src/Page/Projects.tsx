@@ -6,11 +6,32 @@ import {
   Divider,
   ImageList,
   ImageListItem,
+  Pagination,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { projectsData } from "../Page/projectsData";
 
 const Projects: React.FC = () => {
+  // Pagination state
+  const [page, setPage] = React.useState(1);
+  const ITEMS_PER_PAGE = 6; // Show 6 items per page
+
+  const totalPages = Math.ceil(projectsData.length / ITEMS_PER_PAGE);
+  const startIndex = (page - 1) * ITEMS_PER_PAGE;
+
+  const paginatedProjects = projectsData.slice(
+    startIndex,
+    startIndex + ITEMS_PER_PAGE
+  );
+
+  const handlePageChange = (
+    _event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setPage(value);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <Box
       component="section"
@@ -19,9 +40,10 @@ const Projects: React.FC = () => {
         py: { xs: 6, md: 10 },
         px: { xs: 2, sm: 4, md: 6 },
         textAlign: "center",
+        fontFamily: "'Montserrat', sans-serif",
       }}
     >
-      {/* Text Content Section */}
+      {/* Header Section */}
       <Box sx={{ maxWidth: 800, margin: "0 auto", mb: { xs: 5, md: 8 } }}>
         <Typography
           variant="h4"
@@ -31,26 +53,28 @@ const Projects: React.FC = () => {
             fontWeight: 500,
             mb: 2,
             fontSize: { xs: "1.2rem", sm: "1.8rem" },
-            fontFamily: '"Montserrat", sans-serif',
+            fontFamily: "'Montserrat', sans-serif",
           }}
         >
           PROJECTS
         </Typography>
+
         <Typography
           variant="body1"
           sx={{
             mb: 1,
             fontSize: { xs: "0.875rem", md: "1rem" },
-            fontFamily: '"Montserrat", sans-serif',
+            fontFamily: "'Montserrat', sans-serif",
           }}
         >
           Each project is a new and exciting adventure, as each project is
           unique in its location, nature and content.
         </Typography>
+
         <Divider sx={{ width: 150, mx: "auto", mt: 3, borderColor: "#aaa" }} />
       </Box>
 
-      {/* Image Gallery Section */}
+      {/* Image Gallery */}
       <ImageList
         variant="standard"
         gap={36}
@@ -64,7 +88,7 @@ const Projects: React.FC = () => {
           },
         }}
       >
-        {projectsData.map((item) => (
+        {paginatedProjects.map((item) => (
           <ImageListItem
             key={item.slug}
             sx={{
@@ -74,7 +98,6 @@ const Projects: React.FC = () => {
               height: 300,
             }}
           >
-            {/* Make the whole card clickable via Box + RouterLink */}
             <Box
               component={RouterLink}
               to={`/projects/${item.slug}`}
@@ -104,7 +127,7 @@ const Projects: React.FC = () => {
                 }}
               />
 
-              {/* Dark Title + View More Overlay */}
+              {/* Overlay */}
               <Box
                 sx={{
                   position: "absolute",
@@ -118,18 +141,26 @@ const Projects: React.FC = () => {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  fontFamily: '"Montserrat", sans-serif',
+                  fontFamily: "'Montserrat', sans-serif",
                 }}
               >
-                <Typography variant="body2" sx={{ fontWeight: 400 }}>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    fontWeight: 400,
+                    fontFamily: "'Montserrat', sans-serif",
+                  }}
+                >
                   {item.title}
                 </Typography>
+
                 <Typography
                   variant="body2"
                   sx={{
                     fontSize: "0.75rem",
                     textTransform: "uppercase",
                     letterSpacing: 1,
+                    fontFamily: "'Montserrat', sans-serif",
                   }}
                 >
                   View more →
@@ -139,6 +170,35 @@ const Projects: React.FC = () => {
           </ImageListItem>
         ))}
       </ImageList>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <Box sx={{ mt: 5, display: "flex", justifyContent: "center" }}>
+          <Pagination
+            count={totalPages}
+            page={page}
+            onChange={handlePageChange}
+            shape="rounded"
+            sx={{
+              "& .MuiPaginationItem-root": {
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: "0.9rem",
+                borderRadius: "10px",
+                px: 2,
+                py: 0.5,
+              },
+              "& .Mui-selected": {
+                backgroundColor: "#000",
+                color: "#fff",
+                fontWeight: "bold",
+                "&:hover": {
+                  backgroundColor: "#222",
+                },
+              },
+            }}
+          />
+        </Box>
+      )}
     </Box>
   );
 };

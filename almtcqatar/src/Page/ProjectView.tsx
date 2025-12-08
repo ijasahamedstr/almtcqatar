@@ -8,13 +8,19 @@ import {
   Breadcrumbs,
   Link,
   Divider,
+  Modal,
+  IconButton,
 } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { projectsData } from "../Page/projectsData";
 
 const ProjectView: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
 
   const project = projectsData.find((p) => p.slug === slug);
+
+  // ✅ State for fullscreen popup image
+  const [openImg, setOpenImg] = React.useState<string | null>(null);
 
   if (!project) {
     return (
@@ -27,7 +33,12 @@ const ProjectView: React.FC = () => {
         <Typography variant="h5" sx={{ mb: 2 }}>
           Project not found
         </Typography>
-        <Link component={RouterLink} to="/projects" underline="hover">
+        <Link
+          component={RouterLink}
+          to="/projects"
+          underline="hover"
+          sx={{ fontFamily: "'Montserrat', sans-serif" }}
+        >
           ← Back to Projects
         </Link>
       </Container>
@@ -40,29 +51,37 @@ const ProjectView: React.FC = () => {
       sx={{
         backgroundColor: "#f5f2ea",
         py: { xs: 6, md: 10 },
+
+        // ✅ Apply Montserrat to everything inside
+        fontFamily: "'Montserrat', sans-serif",
+        "& *": {
+          fontFamily: "'Montserrat', sans-serif !important",
+        },
       }}
     >
-      <Container
-        maxWidth="lg"
-        sx={{
-          // ✅ All text in this page uses Montserrat
-          "& *": {
-            fontFamily: "'Montserrat', sans-serif",
-          },
-        }}
-      >
+      <Container maxWidth="lg">
         {/* Breadcrumb */}
         <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3 }}>
-          <Link component={RouterLink} color="inherit" to="/">
+          <Link
+            component={RouterLink}
+            color="inherit"
+            to="/"
+            sx={{ fontFamily: "'Montserrat', sans-serif" }}
+          >
             Home
           </Link>
-          <Link component={RouterLink} color="inherit" to="/projects">
+          <Link
+            component={RouterLink}
+            color="inherit"
+            to="/projects"
+            sx={{ fontFamily: "'Montserrat', sans-serif" }}
+          >
             Projects
           </Link>
           <Typography color="text.primary">{project.title}</Typography>
         </Breadcrumbs>
 
-        {/* MAIN 50% / 50% LAYOUT */}
+        {/* MAIN 50/50 Layout */}
         <Box
           sx={{
             display: "flex",
@@ -72,7 +91,7 @@ const ProjectView: React.FC = () => {
             mb: 6,
           }}
         >
-          {/* LEFT: Big Image */}
+          {/* LEFT IMAGE */}
           <Box
             sx={{
               flex: { xs: "1 1 auto", md: "0 0 50%" },
@@ -80,7 +99,6 @@ const ProjectView: React.FC = () => {
               borderRadius: 3,
               overflow: "hidden",
               boxShadow: "0 18px 35px rgba(0,0,0,0.18)",
-              position: "relative",
             }}
           >
             <Box
@@ -111,7 +129,7 @@ const ProjectView: React.FC = () => {
             </Box>
           </Box>
 
-          {/* RIGHT: Details */}
+          {/* RIGHT DETAILS */}
           <Box
             sx={{
               flex: { xs: "1 1 auto", md: "0 0 50%" },
@@ -122,7 +140,7 @@ const ProjectView: React.FC = () => {
               p: { xs: 3, md: 4 },
             }}
           >
-            {/* Title + Amount */}
+            {/* Title & Amount */}
             <Box sx={{ mb: 3 }}>
               <Typography
                 variant="overline"
@@ -147,18 +165,12 @@ const ProjectView: React.FC = () => {
               </Typography>
 
               {project.amount && (
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    color: "#555",
-                  }}
-                >
+                <Typography variant="subtitle1" sx={{ color: "#555" }}>
                   Project Amount: <strong>{project.amount}</strong>
                 </Typography>
               )}
             </Box>
 
-            {/* Divider small accent */}
             <Divider
               sx={{
                 width: 80,
@@ -168,7 +180,7 @@ const ProjectView: React.FC = () => {
               }}
             />
 
-            {/* Description */}
+            {/* DESCRIPTION */}
             <Box>
               <Typography
                 variant="h6"
@@ -179,6 +191,7 @@ const ProjectView: React.FC = () => {
               >
                 Project Description
               </Typography>
+
               <Typography
                 variant="body1"
                 sx={{
@@ -193,7 +206,7 @@ const ProjectView: React.FC = () => {
           </Box>
         </Box>
 
-        {/* Gallery */}
+        {/* GALLERY WITH SMALL THUMBS + FULLSCREEN POPUP */}
         {project.gallery && project.gallery.length > 0 && (
           <Box sx={{ mb: 5 }}>
             <Typography
@@ -205,6 +218,7 @@ const ProjectView: React.FC = () => {
             >
               Project Gallery
             </Typography>
+
             <Divider
               sx={{
                 width: 80,
@@ -214,29 +228,36 @@ const ProjectView: React.FC = () => {
               }}
             />
 
+            {/* Thumbnails grid (small images) */}
             <Box
               sx={{
                 display: "grid",
                 gridTemplateColumns: {
-                  xs: "1fr",
-                  sm: "repeat(2, 1fr)",
-                  md: "repeat(3, 1fr)",
+                  xs: "repeat(2, 1fr)",
+                  sm: "repeat(3, 1fr)",
+                  md: "repeat(4, 1fr)",
                 },
-                gap: 2.5,
+                gap: 2,
               }}
             >
               {project.gallery.map((imageUrl, idx) => (
                 <Box
                   key={idx}
+                  onClick={() => setOpenImg(imageUrl)}
                   sx={{
                     borderRadius: 2,
                     overflow: "hidden",
                     position: "relative",
-                    boxShadow: "0 6px 16px rgba(0,0,0,0.18)",
                     cursor: "pointer",
+                    height: 150, // ✅ small thumbnail
+                    boxShadow: "0 6px 16px rgba(0,0,0,0.18)",
                     transform: "translateY(0)",
                     transition:
                       "transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease",
+                    "&:hover": {
+                      transform: "translateY(-4px)",
+                      boxShadow: "0 12px 26px rgba(0,0,0,0.22)",
+                    },
                     "& img": {
                       display: "block",
                       width: "100%",
@@ -244,25 +265,9 @@ const ProjectView: React.FC = () => {
                       objectFit: "cover",
                       transition: "transform 0.45s ease, filter 0.45s ease",
                     },
-                    "&:hover": {
-                      transform: "translateY(-4px)",
-                      boxShadow: "0 12px 26px rgba(0,0,0,0.22)",
-                    },
                     "&:hover img": {
                       transform: "scale(1.05)",
                       filter: "brightness(1.05)",
-                    },
-                    "&::after": {
-                      content: '""',
-                      position: "absolute",
-                      inset: 0,
-                      background:
-                        "linear-gradient(to top, rgba(0,0,0,0.28), rgba(0,0,0,0))",
-                      opacity: 0,
-                      transition: "opacity 0.4s ease",
-                    },
-                    "&:hover::after": {
-                      opacity: 1,
                     },
                   }}
                 >
@@ -274,10 +279,69 @@ const ProjectView: React.FC = () => {
                 </Box>
               ))}
             </Box>
+
+            {/* FULLSCREEN ZOOM MODAL */}
+            <Modal
+              open={Boolean(openImg)}
+              onClose={() => setOpenImg(null)}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "rgba(0,0,0,0.9)", // dark fullscreen bg
+              }}
+            >
+              <Box
+                sx={{
+                  position: "relative",
+                  width: "100vw",
+                  height: "100vh",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  overflow: "hidden",
+                }}
+              >
+                {/* Close Button */}
+                <IconButton
+                  onClick={() => setOpenImg(null)}
+                  sx={{
+                    position: "absolute",
+                    top: 20,
+                    right: 20,
+                    background: "rgba(255,255,255,0.3)",
+                    color: "#fff",
+                    "&:hover": { background: "rgba(255,255,255,0.6)" },
+                    zIndex: 10,
+                  }}
+                >
+                  <CloseIcon sx={{ fontSize: 30 }} />
+                </IconButton>
+
+                {/* FULLSCREEN IMAGE FIT */}
+                {openImg && (
+                  <img
+                    src={openImg}
+                    alt="Zoomed"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain", // ✅ fits screen while keeping ratio
+                      display: "block",
+                    }}
+                  />
+                )}
+              </Box>
+            </Modal>
           </Box>
         )}
 
-        <Link component={RouterLink} to="/projects" underline="hover">
+        <Link
+          component={RouterLink}
+          to="/projects"
+          underline="hover"
+          sx={{ mt: 3, display: "inline-block" }}
+        >
           ← Back to all projects
         </Link>
       </Container>
