@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Breadcrumbs, Link, Typography, Container,Button } from "@mui/material";
 import Masonry from "@mui/lab/Masonry"; // ✅ Only one import
+import { galleryImages } from "../Page/galleryData"; // ⬅️ adjust path if needed 
 
 
 const managementMembers = [
@@ -20,24 +21,6 @@ const managementMembers = [
   },
 ];
 
-const galleryImages = [
-  "https://maisonrandf.com/wp-content/uploads/2023/09/maisonrandf_index_saudi_-16-768x1024.jpg",
-  "https://maisonrandf.com/wp-content/uploads/2023/07/Durat-Lounge-10.jpg",
-  "https://maisonrandf.com/wp-content/uploads/2023/09/maisonrandf_index_saudi_-24-768x1024.jpg",
-  "https://maisonrandf.com/wp-content/uploads/2023/03/armchair_rattan-768x1024.jpg",
-  "https://maisonrandf.com/wp-content/uploads/2023/04/DURAT-RESTAURANT-7-min-768x576.jpg",
-   "https://maisonrandf.com/wp-content/uploads/2023/09/maisonrandf_index_saudi_-24-768x1024.jpg",
-  "https://maisonrandf.com/wp-content/uploads/2023/03/armchair_rattan-768x1024.jpg",
-  "https://maisonrandf.com/wp-content/uploads/2023/04/Sofa_marble_table-1-min-768x432.jpg",
-  "https://maisonrandf.com/wp-content/uploads/2023/09/maisonrandf_index_saudi_-16-768x1024.jpg",
-  "https://maisonrandf.com/wp-content/uploads/2023/07/Durat-Lounge-10.jpg",
-  "https://maisonrandf.com/wp-content/uploads/2023/04/Straw-marquetry-panel-768x1024.jpg",
-  "https://maisonrandf.com/wp-content/uploads/2023/07/Najd-Artwork-2.jpg",
-  "https://maisonrandf.com/wp-content/uploads/2023/04/DURAT-RESTAURANT-7-min-768x576.jpg",
-   "https://maisonrandf.com/wp-content/uploads/2023/03/Wood-carving-768x961.jpg",
-  "https://maisonrandf.com/wp-content/uploads/2023/05/Qatar_decorative_paint-55.jpg",
-  "https://maisonrandf.com/wp-content/uploads/2023/05/Qatar_decorative_paint-23-768x660.jpg",
-];
 
 const Aboutus: React.FC = () => {
   const IMAGES_PER_LOAD = 4; // Number of images to show per click
@@ -342,82 +325,79 @@ const Aboutus: React.FC = () => {
           ))}
         </Box>
       </Container>
-
-      {/* ✅ Masonry Gallery Section */}
-      <Box
+ <Box
+      sx={{
+        backgroundColor: "#F8FAFC", // full-width background
+        py: 4, // vertical padding
+      }}
+    >
+      <Container
+        maxWidth="lg"
         sx={{
-          backgroundColor: '#F8FAFC', // Apply full-width background color here
-          py: 4, // Use py (padding-top and padding-bottom) for vertical spacing
+          // No extra background/padding here to avoid conflict
         }}
       >
-        <Container 
-          maxWidth="lg" 
-          // 2. Remove background color, mb, and vertical padding (padding-top/bottom) from Container
-          // We keep horizontal padding if needed, but 'lg' container usually handles this.
-          // For simplicity and correctness, we remove the conflicting styles from the Container.
-          sx={{ 
-            // Removed: mb: 10, backgroundColor: '#F8FAFC', padding: 4,
-            // You may keep horizontal padding if desired, but default Container handles it.
-            // We will remove the padding property completely since py on the Box handles vertical spacing.
+        {/* ✅ Masonry Gallery Section */}
+        <Typography
+          variant="h4"
+          align="center"
+          sx={{
+            fontWeight: 700,
+            mb: 6,
+            color: "#5b1c31",
+            fontFamily: "'Montserrat', sans-serif",
           }}
         >
-          <Typography
-            variant="h4"
-            align="center"
-            sx={{
-              fontWeight: 700,
-              mb: 6,
-              color: "#5b1c31",
-              fontFamily: "'Montserrat', sans-serif",
-            }}
-          >
-            Our Projects Gallery
-          </Typography>
+          Our Projects Gallery
+        </Typography>
 
-          <Masonry columns={{ xs: 1, sm: 2, md: 3 }} spacing={2}>
-            {galleryImages.slice(0, visibleImages).map((img, index) => (
-              <Box
-                key={index}
-                component="img"
-                src={img}
-                alt={`Gallery Image ${index + 1}`}
-                className="e-gallery-masonry e-gallery--ltr e-gallery--lazyload"
-                loading="lazy"
-                sx={{
-                  width: "100%",
-                  borderRadius: 2,
-                  boxShadow: 2,
-                }}
-              />
-            ))}
-          </Masonry>
+        <Masonry columns={{ xs: 1, sm: 2, md: 3 }} spacing={2}>
+          {galleryImages.slice(0, visibleImages).map((img, index) => (
+            <Box
+              key={index}
+              component="img"
+              src={img}
+              alt={`Gallery Image ${index + 1}`}
+              className="e-gallery-masonry e-gallery--ltr e-gallery--lazyload"
+              loading="lazy"
+              sx={{
+                width: "100%",
+                borderRadius: 2,
+                boxShadow: 2,
+                display: "block",
+              }}
+            />
+          ))}
+        </Masonry>
 
-          {visibleImages < galleryImages.length && (
-            <Box textAlign="center" mt={4}>
-              <Button
-                variant="contained"
-                onClick={handleLoadMore}
-                // Custom styling for black/white appearance and size
-                sx={{
-                  backgroundColor: 'black',
-                  color: 'white',
-                  '&:hover': {
-                    backgroundColor: '#333',
-                  },
-                  minWidth: '250px',
-                  padding: '12px 30px',
-                  fontSize: '18px',
-                  borderRadius: '0px',
-                  textTransform: 'none',
-                  fontFamily: "'Montserrat', sans-serif",
-                }}
-              >
-                Load More
-              </Button>
-            </Box>
-          )}
-        </Container>
-      </Box>
+        {visibleImages < galleryImages.length && (
+          <Box textAlign="center" mt={4}>
+            <Button
+              variant="contained"
+              onClick={handleLoadMore}
+              sx={{
+                backgroundColor: "black",
+                color: "white",
+                "&:hover": {
+                  backgroundColor: "#333",
+                },
+                minWidth: "250px",
+                padding: "12px 30px",
+                fontSize: "18px",
+                borderRadius: "0px",
+                textTransform: "none",
+                fontFamily: "'Montserrat', sans-serif",
+              }}
+            >
+              Load More
+            </Button>
+          </Box>
+        )}
+      </Container>
+    </Box>
+      
+
+
     </>
   );
 };
