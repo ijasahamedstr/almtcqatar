@@ -1,13 +1,13 @@
 // src/sections/ProjectsSlider.tsx
-
 import React from "react";
 import { Box, Container, Typography, Button } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
+import { Link as RouterLink } from "react-router-dom";
 
-// ✅ import your projects data (shared)
-import { projectsData } from "../Page/projectsData"; // <- important
+// ✅ shared data
+import { projectsData } from "../Page/projectsData";
 
 // 🔹 Simple fade-in-up animation helper
 const fadeInUp = (delay = 0) => ({
@@ -130,7 +130,7 @@ const ProjectsSlider: React.FC = () => {
             cursor: "pointer",
             zIndex: 2,
             backdropFilter: "blur(6px)",
-            transition: "transform 0.3s ease, background-color 0.3s ease",
+            transition: "transform 0.3s.ease, background-color 0.3s ease",
             "&:hover": {
               backgroundColor: "rgba(255,255,255,0.15)",
               transform: "translateY(-50%) scale(1.05)",
@@ -167,10 +167,10 @@ const ProjectsSlider: React.FC = () => {
           >
             {sliderProjects.map((project) => (
               <SwiperSlide key={project.slug}>
-                {/* Clickable card going to /projects/:slug */}
+                {/* ✅ Use RouterLink, not <a href> */}
                 <Box
-                  component="a"
-                  href={`/projects/${project.slug}`}
+                  component={RouterLink}
+                  to={`/projects/${project.slug}`}
                   sx={{
                     textDecoration: "none",
                     color: "#fff",
@@ -265,6 +265,8 @@ const ProjectsSlider: React.FC = () => {
         {/* Bottom Button */}
         <Button
           variant="outlined"
+          component={RouterLink}   // ✅ use RouterLink
+          to="/projects"           // ✅ not href
           sx={{
             mt: 4,
             px: 4,
@@ -282,7 +284,6 @@ const ProjectsSlider: React.FC = () => {
               borderColor: "#fff",
             },
           }}
-          href="/projects" // ✅ go to Projects list
         >
           View All Projects
         </Button>

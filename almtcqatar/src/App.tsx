@@ -5,10 +5,10 @@ import Footer from './Page/Footer';
 import Home from './Page/Home';
 import Aboutus from './Page/About Us';
 import Contactus from './Page/contact-us';
-import Projects from './Page/Projects';
 import ExpertiseDetails from './Page/ExpertiseView';
 import ExpertiseAll from './Page/ExpertiseAll';
 import ProjectView from './Page/ProjectView';
+import Projectsall from './Page/Projectsall';
 
 
 
@@ -21,8 +21,8 @@ function App() {
         <Route path="/" element={< Home/>} />
         <Route path="/Portfolio" element={< Aboutus/>} />
         <Route path="/contact-us" element={< Contactus/>} />
-        <Route path="/projects" element={<Projects/>} />
-        <Route path="/projects/:slug" element={<ProjectView/>} />
+        <Route path="/projects" element={<Projectsall />} />
+        <Route path="/projects/:slug" element={<ProjectView />} />
         <Route path="/Expertise/:slug" element={<ExpertiseDetails/>} />
         <Route path="/Expertise" element={<ExpertiseAll/>} />
       </Routes>

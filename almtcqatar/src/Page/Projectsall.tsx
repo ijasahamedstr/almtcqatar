@@ -9,12 +9,11 @@ import {
   Pagination,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import { projectsData } from "../Page/projectsData"; // ✅ shared data
+import { projectsData } from "../Page/projectsData"; // ✅ fixed path
 
-const Projects: React.FC = () => {
-  // Pagination state
+const Projectsall: React.FC = () => {
   const [page, setPage] = React.useState(1);
-  const ITEMS_PER_PAGE = 6; // Show 6 items per page
+  const ITEMS_PER_PAGE = 6;
 
   const totalPages = Math.ceil(projectsData.length / ITEMS_PER_PAGE);
   const startIndex = (page - 1) * ITEMS_PER_PAGE;
@@ -203,4 +202,4 @@ const Projects: React.FC = () => {
   );
 };
 
-export default Projects;
+export default Projectsall;
