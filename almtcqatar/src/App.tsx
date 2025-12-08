@@ -21,9 +21,9 @@ function App() {
         <Route path="/" element={< Home/>} />
         <Route path="/Portfolio" element={< Aboutus/>} />
         <Route path="/contact-us" element={< Contactus/>} />
-        <Route path="/project" element={<Projects />} />
-        <Route path="/projects/:slug" element={<ProjectView />} />
-        <Route path="/Expertise/:slug" element={<ExpertiseDetails />} />
+        <Route path="/project" element={<Projects/>} />
+        <Route path="/projects/:slug" element={<ProjectView/>} />
+        <Route path="/Expertise/:slug" element={<ExpertiseDetails/>} />
         <Route path="/Expertise" element={<ExpertiseAll/>} />
       </Routes>
       <Footer/>
