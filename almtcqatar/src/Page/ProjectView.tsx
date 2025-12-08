@@ -12,7 +12,7 @@ import {
   IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { projectsData } from "../Page/projectsData";
+import { projectsData } from "../Page/projectsData"; // ✅ shared data
 
 const ProjectView: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -51,8 +51,6 @@ const ProjectView: React.FC = () => {
       sx={{
         backgroundColor: "#f5f2ea",
         py: { xs: 6, md: 10 },
-
-        // ✅ Apply Montserrat to everything inside
         fontFamily: "'Montserrat', sans-serif",
         "& *": {
           fontFamily: "'Montserrat', sans-serif !important",
@@ -249,7 +247,7 @@ const ProjectView: React.FC = () => {
                     overflow: "hidden",
                     position: "relative",
                     cursor: "pointer",
-                    height: 150, // ✅ small thumbnail
+                    height: 150,
                     boxShadow: "0 6px 16px rgba(0,0,0,0.18)",
                     transform: "translateY(0)",
                     transition:
@@ -263,7 +261,8 @@ const ProjectView: React.FC = () => {
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",
-                      transition: "transform 0.45s ease, filter 0.45s ease",
+                      transition:
+                        "transform 0.45s ease, filter 0.45s ease",
                     },
                     "&:hover img": {
                       transform: "scale(1.05)",
@@ -288,7 +287,7 @@ const ProjectView: React.FC = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundColor: "rgba(0,0,0,0.9)", // dark fullscreen bg
+                backgroundColor: "rgba(0,0,0,0.9)",
               }}
             >
               <Box
@@ -326,7 +325,7 @@ const ProjectView: React.FC = () => {
                     style={{
                       width: "100%",
                       height: "100%",
-                      objectFit: "contain", // ✅ fits screen while keeping ratio
+                      objectFit: "contain",
                       display: "block",
                     }}
                   />

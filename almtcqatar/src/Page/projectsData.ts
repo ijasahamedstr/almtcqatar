@@ -82,7 +82,7 @@ const rawProjects: Omit<Project, "slug">[] = [
       "https://maisonrandf.com/wp-content/uploads/2023/04/Durat-Lounge-1536x2048.jpg.webp",
     ],
   },
-   {
+  {
     title: "Najd Artwork",
     img: "https://maisonrandf.com/wp-content/uploads/2023/06/Najd-Artwork.jpg.avif",
     description:
@@ -124,8 +124,18 @@ const rawProjects: Omit<Project, "slug">[] = [
   },
 ];
 
-// --- Final Data with slug ---
-export const projectsData: Project[] = rawProjects.map((p) => ({
-  ...p,
-  slug: createProjectSlug(p.title),
-}));
+// --- Final Data with unique slug per item (even if title repeats) ---
+const slugCounts: Record<string, number> = {};
+
+export const projectsData: Project[] = rawProjects.map((p) => {
+  const baseSlug = createProjectSlug(p.title);
+  const count = (slugCounts[baseSlug] ?? 0) + 1;
+  slugCounts[baseSlug] = count;
+
+  const slug = count === 1 ? baseSlug : `${baseSlug}-${count}`;
+
+  return {
+    ...p,
+    slug,
+  };
+});

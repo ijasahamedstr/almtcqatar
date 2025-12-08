@@ -9,7 +9,7 @@ import {
   Pagination,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import { projectsData } from "../Page/projectsData";
+import { projectsData } from "../Page/projectsData"; // ✅ shared data
 
 const Projects: React.FC = () => {
   // Pagination state

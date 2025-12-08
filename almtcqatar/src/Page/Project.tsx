@@ -7,8 +7,8 @@ import { Autoplay, Navigation } from "swiper/modules";
 
 import "swiper/css";
 
-// ✅ import your projects data
-import { projectsData } from "./projectsData"; // adjust path if needed
+// ✅ import your projects data (shared)
+import { projectsData } from "../Page/projectsData"; // <- important
 
 // 🔹 Simple fade-in-up animation helper
 const fadeInUp = (delay = 0) => ({
@@ -186,7 +186,7 @@ const ProjectsSlider: React.FC = () => {
                       cursor: "pointer",
                       transform: "scale(0.96)",
                       transition:
-                        "transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.5s ease, filter 0.5s ease",
+                        "transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.5s.ease, filter 0.5s ease",
                       boxShadow: "0 10px 30px rgba(0,0,0,0.7)",
                       "&:hover": {
                         transform: "scale(1.03) translateY(-8px)",
@@ -218,7 +218,7 @@ const ProjectsSlider: React.FC = () => {
                         position: "absolute",
                         inset: 0,
                         background:
-                          "linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.35))",
+                          "linear-gradient(to.top, rgba(0,0,0,0.9), rgba(0,0,0,0.35))",
                         transition:
                           "background 0.5s ease, opacity 0.5s ease",
                       }}
@@ -283,7 +283,7 @@ const ProjectsSlider: React.FC = () => {
               borderColor: "#fff",
             },
           }}
-          href="/project"
+          href="/projects" // ✅ go to Projects list
         >
           View All Projects
         </Button>
