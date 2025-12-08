@@ -9,11 +9,20 @@ import {
   Pagination,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import { projectsData } from "../Page/projectsData"; // ✅ fixed path
+import { projectsData } from "../Page/projectsData";
 
 const Projectsall: React.FC = () => {
   const [page, setPage] = React.useState(1);
   const ITEMS_PER_PAGE = 6;
+
+  // ✅ Scroll to top when arriving on Projects page
+  React.useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   const totalPages = Math.ceil(projectsData.length / ITEMS_PER_PAGE);
   const startIndex = (page - 1) * ITEMS_PER_PAGE;
@@ -104,10 +113,7 @@ const Projectsall: React.FC = () => {
                 display: "block",
                 height: "100%",
                 width: "100%",
-                position: "relative",
                 textDecoration: "none",
-                color: "inherit",
-                cursor: "pointer",
                 "&:hover img": {
                   transform: "scale(1.05)",
                 },
@@ -136,22 +142,12 @@ const Projectsall: React.FC = () => {
                   backgroundColor: "rgba(0, 0, 0, 0.6)",
                   color: "white",
                   p: 2,
-                  textAlign: "left",
                   display: "flex",
-                  alignItems: "center",
                   justifyContent: "space-between",
                   fontFamily: "'Montserrat', sans-serif",
                 }}
               >
-                <Typography
-                  variant="body2"
-                  sx={{
-                    fontWeight: 400,
-                    fontFamily: "'Montserrat', sans-serif",
-                  }}
-                >
-                  {item.title}
-                </Typography>
+                <Typography variant="body2">{item.title}</Typography>
 
                 <Typography
                   variant="body2"
@@ -159,7 +155,6 @@ const Projectsall: React.FC = () => {
                     fontSize: "0.75rem",
                     textTransform: "uppercase",
                     letterSpacing: 1,
-                    fontFamily: "'Montserrat', sans-serif",
                   }}
                 >
                   View more →
@@ -190,9 +185,7 @@ const Projectsall: React.FC = () => {
                 backgroundColor: "#000",
                 color: "#fff",
                 fontWeight: "bold",
-                "&:hover": {
-                  backgroundColor: "#222",
-                },
+                "&:hover": { backgroundColor: "#222" },
               },
             }}
           />

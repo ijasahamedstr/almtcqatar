@@ -23,6 +23,15 @@ const ExpertiseDetails: React.FC = () => {
 
   const [openImg, setOpenImg] = React.useState<string | null>(null);
 
+  // ✅ Scroll page to top when opening this view
+  React.useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, [slug]);
+
   if (!expertise) {
     return (
       <Container
@@ -200,7 +209,7 @@ const ExpertiseDetails: React.FC = () => {
           </Box>
         </Box>
 
-        {/* Gallery thumbnails */}
+        {/* Gallery */}
         {expertise.gallery && expertise.gallery.length > 0 && (
           <Box sx={{ mb: 5 }}>
             <Typography
@@ -233,47 +242,37 @@ const ExpertiseDetails: React.FC = () => {
                 gap: 2,
               }}
             >
-              {expertise.gallery.map((imageUrl, idx) => (
+              {expertise.gallery.map((img, idx) => (
                 <Box
                   key={idx}
-                  onClick={() => setOpenImg(imageUrl)}
+                  onClick={() => setOpenImg(img)}
                   sx={{
                     borderRadius: 2,
                     overflow: "hidden",
-                    position: "relative",
                     cursor: "pointer",
                     height: 150,
                     boxShadow: "0 6px 16px rgba(0,0,0,0.18)",
-                    transform: "translateY(0)",
                     transition:
-                      "transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease",
+                      "transform .35s, box-shadow .35s, filter .35s",
                     "&:hover": {
                       transform: "translateY(-4px)",
                       boxShadow: "0 12px 26px rgba(0,0,0,0.22)",
                     },
-                    "& img": {
-                      display: "block",
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      transition: "transform 0.45s ease, filter 0.45s ease",
-                    },
-                    "&:hover img": {
-                      transform: "scale(1.05)",
-                      filter: "brightness(1.05)",
-                    },
                   }}
                 >
                   <img
-                    src={imageUrl}
-                    alt={`${expertise.title} ${idx + 1}`}
-                    loading="lazy"
+                    src={img}
+                    alt={expertise.title}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
                   />
                 </Box>
               ))}
             </Box>
 
-            {/* Fullscreen modal */}
             <Modal
               open={Boolean(openImg)}
               onClose={() => setOpenImg(null)}
@@ -289,10 +288,6 @@ const ExpertiseDetails: React.FC = () => {
                   position: "relative",
                   width: "100vw",
                   height: "100vh",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  overflow: "hidden",
                 }}
               >
                 <IconButton
@@ -304,7 +299,6 @@ const ExpertiseDetails: React.FC = () => {
                     background: "rgba(255,255,255,0.3)",
                     color: "#fff",
                     "&:hover": { background: "rgba(255,255,255,0.6)" },
-                    zIndex: 10,
                   }}
                 >
                   <CloseIcon sx={{ fontSize: 30 }} />
@@ -313,12 +307,10 @@ const ExpertiseDetails: React.FC = () => {
                 {openImg && (
                   <img
                     src={openImg}
-                    alt="Zoomed"
                     style={{
                       width: "100%",
                       height: "100%",
                       objectFit: "contain",
-                      display: "block",
                     }}
                   />
                 )}

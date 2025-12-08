@@ -1,10 +1,16 @@
 // src/pages/Expertise.tsx
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Card, CardMedia, Box, Typography } from "@mui/material";
+import { Container, Card, CardMedia, Box, Typography, Button } from "@mui/material";
 import { expertiseData } from "../Page/expertiseData";
 
 const Expertise: React.FC = () => {
+  // Detect screen size
+  const isDesktop = window.innerWidth >= 1024;
+
+  // Show only 6 items on desktop, show all on smaller screens
+  const displayedItems = isDesktop ? expertiseData.slice(0, 6) : expertiseData;
+
   return (
     <section
       style={{
@@ -48,10 +54,10 @@ const Expertise: React.FC = () => {
           }}
         >
           Maison (MTC) is dedicated to the execution of high-end interiors
-          projects and is proposing tailor-made expertise to match with
-          the needs of our clients.
+          projects and is proposing tailor-made expertise to match with the needs of our clients.
         </Typography>
 
+        {/* Cards Grid */}
         <Box
           sx={{
             display: "grid",
@@ -59,7 +65,7 @@ const Expertise: React.FC = () => {
             gap: 2.5,
           }}
         >
-          {expertiseData.map((item) => (
+          {displayedItems.map((item) => (
             <Link
               key={item.slug}
               to={`/Expertise/${item.slug}`}
@@ -72,11 +78,11 @@ const Expertise: React.FC = () => {
                   cursor: "pointer",
                   position: "relative",
                   transition: "all 0.35s ease",
-                  border: "2px solid rgba(212,193,155,0.3)", // soft gold outline
+                  border: "2px solid rgba(212,193,155,0.3)",
                   "&:hover": {
                     transform: "translateY(-6px)",
-                    boxShadow: "0 0 18px rgba(212,193,155,0.5)", // gold glow
-                    borderColor: "#d4c19b", // strong gold border
+                    boxShadow: "0 0 18px rgba(212,193,155,0.5)",
+                    borderColor: "#d4c19b",
                   },
                 }}
               >
@@ -95,6 +101,8 @@ const Expertise: React.FC = () => {
                     },
                   }}
                 />
+
+                {/* Title Overlay */}
                 <Box
                   sx={{
                     position: "absolute",
@@ -126,6 +134,33 @@ const Expertise: React.FC = () => {
             </Link>
           ))}
         </Box>
+
+        {/* Desktop-only: View More button */}
+        {isDesktop && expertiseData.length > 6 && (
+          <Box sx={{ mt: 6 }}>
+            <Button
+              component={Link}
+              to="/Expertise"
+              sx={{
+                px: 4,
+                py: 1.5,
+                borderRadius: "30px",
+                border: "1px solid #d4c19b",
+                color: "#fff",
+                letterSpacing: 2,
+                textTransform: "uppercase",
+                transition: "0.3s ease",
+                fontFamily: '"Montserrat", sans-serif',
+                "&:hover": {
+                  backgroundColor: "#d4c19b",
+                  color: "#000",
+                },
+              }}
+            >
+              View More →
+            </Button>
+          </Box>
+        )}
       </Container>
     </section>
   );

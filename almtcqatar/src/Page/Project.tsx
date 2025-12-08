@@ -6,7 +6,6 @@ import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import { Link as RouterLink } from "react-router-dom";
 
-// ✅ shared data
 import { projectsData } from "../Page/projectsData";
 
 // 🔹 Simple fade-in-up animation helper
@@ -21,7 +20,7 @@ const fadeInUp = (delay = 0) => ({
   },
 });
 
-// 🔹 Use first few projects from projectsData (or all if you want)
+// 🔹 Use first few projects from projectsData
 const sliderProjects = projectsData.slice(0, 6);
 
 const ProjectsSlider: React.FC = () => {
@@ -85,68 +84,74 @@ const ProjectsSlider: React.FC = () => {
           creation.
         </Typography>
 
-        {/* Custom Navigation Arrows */}
+        {/* 🔹 Slider wrapper so arrows center on the cards, not the whole section */}
         <Box
-          className="projects-prev"
           sx={{
-            position: "absolute",
-            left: { xs: 8, md: -24 },
-            top: "50%",
-            transform: "translateY(-50%)",
-            width: 40,
-            height: 40,
-            borderRadius: "50%",
-            border: "1px solid rgba(255,255,255,0.7)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            zIndex: 2,
-            backdropFilter: "blur(6px)",
-            transition: "transform 0.3s ease, background-color 0.3s ease",
-            "&:hover": {
-              backgroundColor: "rgba(255,255,255,0.15)",
-              transform: "translateY(-50%) scale(1.05)",
-            },
+            position: "relative",
+            ...fadeInUp(0.3),
           }}
         >
-          <Typography sx={{ fontSize: 24, lineHeight: 1 }}>‹</Typography>
-        </Box>
+          {/* Custom Navigation Arrows - centered to slider area */}
+          <Box
+            className="projects-prev"
+            sx={{
+              position: "absolute",
+              left: { xs: -4, sm: -8, md: -24 },
+              top: "50%",
+              transform: "translateY(-50%)",
+              width: 36,
+              height: 36,
+              borderRadius: "50%",
+              border: "1px solid rgba(255,255,255,0.7)",
+              display: { xs: "none", sm: "flex" }, // hide on very small mobile if you want
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              zIndex: 2,
+              backdropFilter: "blur(6px)",
+              transition: "transform 0.3s ease, background-color 0.3s ease",
+              "&:hover": {
+                backgroundColor: "rgba(255,255,255,0.15)",
+                transform: "translateY(-50%) scale(1.05)",
+              },
+            }}
+          >
+            <Typography sx={{ fontSize: 24, lineHeight: 1 }}>‹</Typography>
+          </Box>
 
-        <Box
-          className="projects-next"
-          sx={{
-            position: "absolute",
-            right: { xs: 8, md: -24 },
-            top: "50%",
-            transform: "translateY(-50%)",
-            width: 40,
-            height: 40,
-            borderRadius: "50%",
-            border: "1px solid rgba(255,255,255,0.7)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            zIndex: 2,
-            backdropFilter: "blur(6px)",
-            transition: "transform 0.3s.ease, background-color 0.3s ease",
-            "&:hover": {
-              backgroundColor: "rgba(255,255,255,0.15)",
-              transform: "translateY(-50%) scale(1.05)",
-            },
-          }}
-        >
-          <Typography sx={{ fontSize: 24, lineHeight: 1 }}>›</Typography>
-        </Box>
+          <Box
+            className="projects-next"
+            sx={{
+              position: "absolute",
+              right: { xs: -4, sm: -8, md: -24 },
+              top: "50%",
+              transform: "translateY(-50%)",
+              width: 36,
+              height: 36,
+              borderRadius: "50%",
+              border: "1px solid rgba(255,255,255,0.7)",
+              display: { xs: "none", sm: "flex" },
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              zIndex: 2,
+              backdropFilter: "blur(6px)",
+              transition: "transform 0.3s ease, background-color 0.3s ease",
+              "&:hover": {
+                backgroundColor: "rgba(255,255,255,0.15)",
+                transform: "translateY(-50%) scale(1.05)",
+              },
+            }}
+          >
+            <Typography sx={{ fontSize: 24, lineHeight: 1 }}>›</Typography>
+          </Box>
 
-        {/* Slider */}
-        <Box sx={{ ...fadeInUp(0.3) }}>
+          {/* Slider */}
           <Swiper
             spaceBetween={24}
-            slidesPerView={1.1}
+            slidesPerView={1}        // 🔹 mobile: one card fully visible
+            centeredSlides           // 🔹 card centered on mobile
             loop
-            centeredSlides
             grabCursor
             speed={800}
             autoplay={{
@@ -158,16 +163,15 @@ const ProjectsSlider: React.FC = () => {
               nextEl: ".projects-next",
             }}
             breakpoints={{
-              600: { slidesPerView: 2 },
-              900: { slidesPerView: 3 },
-              1200: { slidesPerView: 4 },
+              600: { slidesPerView: 2, centeredSlides: false },
+              900: { slidesPerView: 3, centeredSlides: false },
+              1200: { slidesPerView: 4, centeredSlides: false },
             }}
             modules={[Autoplay, Navigation]}
             style={{ paddingBottom: "20px" }}
           >
             {sliderProjects.map((project) => (
               <SwiperSlide key={project.slug}>
-                {/* ✅ Use RouterLink, not <a href> */}
                 <Box
                   component={RouterLink}
                   to={`/projects/${project.slug}`}
@@ -185,7 +189,7 @@ const ProjectsSlider: React.FC = () => {
                       cursor: "pointer",
                       transform: "scale(0.96)",
                       transition:
-                        "transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.5s.ease, filter 0.5s ease",
+                        "transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.5s ease, filter 0.5s ease",
                       boxShadow: "0 10px 30px rgba(0,0,0,0.7)",
                       "&:hover": {
                         transform: "scale(1.03) translateY(-8px)",
@@ -217,9 +221,9 @@ const ProjectsSlider: React.FC = () => {
                         position: "absolute",
                         inset: 0,
                         background:
-                          "linear-gradient(to.top, rgba(0,0,0,0.9), rgba(0,0,0,0.35))",
+                          "linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.35))",
                         transition:
-                          "background 0.5s ease, opacity 0.5s ease",
+                          "background 0.5s ease, opacity 0.5s.ease",
                       }}
                     />
 
@@ -265,8 +269,8 @@ const ProjectsSlider: React.FC = () => {
         {/* Bottom Button */}
         <Button
           variant="outlined"
-          component={RouterLink}   // ✅ use RouterLink
-          to="/projects"           // ✅ not href
+          component={RouterLink}
+          to="/projects"
           sx={{
             mt: 4,
             px: 4,

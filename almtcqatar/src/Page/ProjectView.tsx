@@ -19,6 +19,15 @@ const ProjectView: React.FC = () => {
 
   const project = projectsData.find((p) => p.slug === slug);
 
+  // ✅ Scroll to top when this page loads / slug changes
+  React.useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth", // use "auto" if you don't want animation
+    });
+  }, [slug]);
+
   // ✅ State for fullscreen popup image
   const [openImg, setOpenImg] = React.useState<string | null>(null);
 

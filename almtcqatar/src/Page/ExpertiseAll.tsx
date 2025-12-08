@@ -12,9 +12,18 @@ import { Link as RouterLink } from "react-router-dom";
 import { expertiseData } from "../Page/expertiseData";
 
 const ExpertiseAll: React.FC = () => {
+  // Scroll to top on page load
+  React.useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   // Pagination state
   const [page, setPage] = React.useState(1);
-  const ITEMS_PER_PAGE = 8; // Show 6 items per page
+  const ITEMS_PER_PAGE = 8;
 
   const totalPages = Math.ceil(expertiseData.length / ITEMS_PER_PAGE);
   const startIndex = (page - 1) * ITEMS_PER_PAGE;
@@ -82,10 +91,10 @@ const ExpertiseAll: React.FC = () => {
           maxWidth: 1400,
           mx: "auto",
           gridTemplateColumns: {
-            xs: "repeat(1, 1fr) !important", // mobile
-            sm: "repeat(2, 1fr) !important", // tablet
-            md: "repeat(3, 1fr) !important", // mid screens
-            lg: "repeat(4, 1fr) !important", // 4 cards per row on desktop
+            xs: "repeat(1, 1fr) !important",
+            sm: "repeat(2, 1fr) !important",
+            md: "repeat(3, 1fr) !important",
+            lg: "repeat(4, 1fr) !important",
           },
         }}
       >
@@ -111,10 +120,7 @@ const ExpertiseAll: React.FC = () => {
                 display: "block",
                 height: "100%",
                 width: "100%",
-                position: "relative",
                 textDecoration: "none",
-                color: "inherit",
-                cursor: "pointer",
                 "&:hover img": {
                   transform: "scale(1.05)",
                 },
@@ -152,7 +158,6 @@ const ExpertiseAll: React.FC = () => {
                     fontWeight: 600,
                     letterSpacing: 0.5,
                     mb: 1,
-                    fontFamily: "'Montserrat', sans-serif",
                   }}
                 >
                   {item.title}
@@ -180,8 +185,6 @@ const ExpertiseAll: React.FC = () => {
                       textTransform: "uppercase",
                       backdropFilter: "blur(4px)",
                       backgroundColor: "rgba(255,255,255,0.1)",
-                      transition: "0.3s ease",
-                      fontFamily: "'Montserrat', sans-serif",
                       "&:hover": {
                         backgroundColor: "#fff",
                         color: "#000",

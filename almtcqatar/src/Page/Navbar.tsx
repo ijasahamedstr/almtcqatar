@@ -29,7 +29,7 @@ import EmailIcon from '@mui/icons-material/Email';
 const pages = [
   { label: 'Home', path: '/' },
   { label: 'Portfolio', path: '/Portfolio' },
-  { label: 'Project', path: '/project' },
+  { label: 'projects', path: '/projects' },
   { label: 'Expertise', path: '/Expertise' },
   { label: 'Contact Us', path: '/contact-us' },
  
