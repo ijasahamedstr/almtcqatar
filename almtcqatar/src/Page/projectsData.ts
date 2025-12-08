@@ -82,6 +82,7 @@ const rawProjects: Omit<Project, "slug">[] = [
       "https://maisonrandf.com/wp-content/uploads/2023/04/Durat-Lounge-1536x2048.jpg.webp",
     ],
   },
+  // 🔁 These duplicates are fine – slug logic below will make them unique
   {
     title: "Najd Artwork",
     img: "https://maisonrandf.com/wp-content/uploads/2023/06/Najd-Artwork.jpg.avif",
