@@ -1,15 +1,8 @@
+// src/pages/Expertise.tsx
 import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Card, CardMedia, Box, Typography } from "@mui/material";
-
-const products1 = [
-  { id: 1, imageUrl: "https://maisonrandf.com/wp-content/uploads/2023/04/Durat-Lobby-19.jpg.avif", link: "/Web-Media-Video", title: "Design & Project Management" },
-  { id: 2, imageUrl: "https://maisonrandf.com/wp-content/uploads/2023/04/Expertise_customized-furniture-_1__1-1536x2048.jpg.webp", link: "/vr-videos", title: "Furniture" },
-  { id: 3, imageUrl: "https://maisonrandf.com/wp-content/uploads/2023/04/Expertise_curtaining.jpg.avif", link: "/Web-Media-photo", title: "Curtaining & upholstery" },
-  { id: 4, imageUrl: "https://maisonrandf.com/wp-content/uploads/2023/04/expertise_complex-joinery-work-_1__1-2048x1536.jpg.webp", link: "/Motion-graphics", title: "Joinery work" },
-  { id: 5, imageUrl: "https://maisonrandf.com/wp-content/uploads/2023/04/Expertise_special-finishes-min-1147x2048.jpg.webp", link: "/AIVideos", title: "Special finishes" },
-  { id: 6, imageUrl: "https://maisonrandf.com/wp-content/uploads/2023/04/Expertise_Straw-marquetry-min-1147x2048.jpg.webp", link: "/3D-Animation", title: "Straw marquetry" },
-];
+import { expertiseData } from "../Page/expertiseData";
 
 const Expertise: React.FC = () => {
   return (
@@ -31,46 +24,75 @@ const Expertise: React.FC = () => {
         sx={{
           paddingX: { xs: 2, sm: 3, md: 5 },
           textAlign: "center",
+          fontFamily: '"Montserrat", sans-serif',
         }}
       >
-        <h1 style={{ color: "white", marginBottom: "20px", fontFamily: '"Montserrat", sans-serif' }}>Expertise</h1>
-        <p style={{ color: "white", marginBottom: "30px", fontFamily: '"Montserrat", sans-serif' }}>
-          Maison (MTC) is dedicated to the execution of high-end interior’s <br />
-          project and is proposing tailor-made expertise to match with <br />
-          the needs of our clients.
-        </p>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: "20px",
+        <Typography
+          variant="h4"
+          sx={{
+            color: "white",
+            mb: 2,
+            letterSpacing: 2,
+            fontFamily: '"Montserrat", sans-serif',
           }}
         >
-          {products1.map((product) => (
-            <Link key={product.id} to={product.link} style={{ textDecoration: "none" }}>
+          Expertise
+        </Typography>
+
+        <Typography
+          sx={{
+            color: "white",
+            mb: 4,
+            fontFamily: '"Montserrat", sans-serif',
+            lineHeight: 1.6,
+          }}
+        >
+          Maison (MTC) is dedicated to the execution of high-end interiors
+          projects and is proposing tailor-made expertise to match with
+          the needs of our clients.
+        </Typography>
+
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+            gap: 2.5,
+          }}
+        >
+          {expertiseData.map((item) => (
+            <Link
+              key={item.slug}
+              to={`/Expertise/${item.slug}`}
+              style={{ textDecoration: "none" }}
+            >
               <Card
                 sx={{
                   borderRadius: "20px",
                   overflow: "hidden",
                   cursor: "pointer",
                   position: "relative",
+                  transition: "all 0.35s ease",
+                  border: "2px solid rgba(212,193,155,0.3)", // soft gold outline
                   "&:hover": {
                     transform: "translateY(-6px)",
-                    boxShadow: "0 12px 24px rgba(0,0,0,0.2)",
-                    transition: "all 0.3s ease",
+                    boxShadow: "0 0 18px rgba(212,193,155,0.5)", // gold glow
+                    borderColor: "#d4c19b", // strong gold border
                   },
                 }}
               >
                 <CardMedia
                   component="img"
                   height="350"
-                  image={product.imageUrl}
-                  alt={product.title}
+                  image={item.heroImage}
+                  alt={item.title}
                   sx={{
                     objectFit: "cover",
                     filter: "brightness(50%)",
-                    transition: "filter 0.3s ease",
+                    transition: "filter 0.3s ease, transform 0.3s ease",
+                    "&:hover": {
+                      filter: "brightness(65%)",
+                      transform: "scale(1.03)",
+                    },
                   }}
                 />
                 <Box
@@ -94,15 +116,16 @@ const Expertise: React.FC = () => {
                         md: "18px",
                         lg: "20px",
                       },
+                      letterSpacing: 1,
                     }}
                   >
-                    {product.title}
+                    {item.title}
                   </Typography>
                 </Box>
               </Card>
             </Link>
           ))}
-        </div>
+        </Box>
       </Container>
     </section>
   );
