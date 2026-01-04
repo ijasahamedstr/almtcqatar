@@ -64,12 +64,12 @@ const rawProjects: Omit<Project, "slug">[] = [
   },
   {
     title: "Private Palace",
-    img: "https://maisonrandf.com/wp-content/uploads/2023/05/Qatar_decorative_paint-50.jpg.avif",
+    img: "https://i.ibb.co/zhxDgr5F/IMG-20210912-WA0106.webp",
     description:
       "High-end decorative paint and finishes for a private palace, with focus on luxury and fine detailing.",
     amount: "SAR 1,200,000",
     gallery: [
-      "https://maisonrandf.com/wp-content/uploads/2023/05/Qatar_decorative_paint-50.jpg.avif",
+      "https://i.ibb.co/zhxDgr5F/IMG-20210912-WA0106.webp",
     ],
   },
   {
@@ -101,16 +101,6 @@ const rawProjects: Omit<Project, "slug">[] = [
     amount: "SAR 480,000",
     gallery: [
       "https://maisonrandf.com/wp-content/uploads/2023/04/photo-principale-du-projet-min-1536x2048.jpg.webp",
-    ],
-  },
-  {
-    title: "Private Palace",
-    img: "https://maisonrandf.com/wp-content/uploads/2023/05/Qatar_decorative_paint-50.jpg.avif",
-    description:
-      "High-end decorative paint and finishes for a private palace, with focus on luxury and fine detailing.",
-    amount: "SAR 1,200,000",
-    gallery: [
-      "https://maisonrandf.com/wp-content/uploads/2023/05/Qatar_decorative_paint-50.jpg.avif",
     ],
   },
   {

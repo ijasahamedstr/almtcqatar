@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Box, Container, Typography } from "@mui/material";
 
+const brandColor = "#5b1c31";
+
 type Step = { number: number; label: string };
 
 /** AnimatedNumber: smooth count from 0 -> value with optional delay */
@@ -57,8 +59,14 @@ const About: React.FC = () => {
     <Container
       maxWidth={false}
       disableGutters
-      sx={{ p: 0, m: 0, width: "100%", fontFamily: '"Montserrat", sans-serif' }}
+      sx={{
+        p: 0,
+        mt: { xs: "50px", md: "100px" }, // responsive top margin
+        width: "100%",
+        fontFamily: '"Montserrat", sans-serif',
+      }}
     >
+
       <Box
         sx={{
           width: "100%",
@@ -83,27 +91,31 @@ const About: React.FC = () => {
         >
           {/* LEFT SIDE */}
           <Box sx={{ flex: { xs: "1 1 100%", md: "0 0 60%" }, pl: { lg: "350px" } }}>
-            <Typography
+             <Typography
               variant="h3"
               sx={{
                 fontFamily: '"Montserrat", sans-serif',
-                fontWeight: 700,
-                color: "#222",
-                mb: 1,
-                fontSize: { xs: "1.8rem", md: "2rem" },
+                fontWeight: 800,
+                color: brandColor,
+                mb: 2,
+                fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
+                lineHeight: 1.2,
               }}
             >
-              Al Mubthadieen Trading & Contracting (MTC)
+              Al Mubthadieen <br />
+              <span style={{ color: "#222" }}>Trading & Contracting</span>
             </Typography>
 
-            <Typography
-              variant="h6"
+              <Typography
               sx={{
                 fontFamily: '"Montserrat", sans-serif',
                 fontWeight: 600,
-                color: "#343f52",
-                mb: 3,
-                fontSize: { xs: "0.95rem", md: "1.35rem" },
+                color: "#555",
+                mb: 4,
+                fontSize: { xs: "1rem", md: "1.2rem" },
+                letterSpacing: 0.5,
+                borderLeft: `4px solid ${brandColor}`,
+                pl: 2
               }}
             >
               Where Craftsmanship Meets Creativity in Timeless Interiors
@@ -135,88 +147,106 @@ const About: React.FC = () => {
             </Typography>
 
             {/* Progress Section */}
-            <Box sx={{ mt: 6, width: "100%", pb: { xs: 2, md: 10 } }}>
-              {steps.map((step, idx) => {
-                const delayMs = 200 + idx * 220;
-                return (
-                  <Box key={step.label} sx={{ mb: 4 }}>
-                    <Box
+            <Box sx={{ mt: 6, width: "100%", pb: { xs: 2, md: 10 }, px: 2 }}>
+            {steps.map((step, idx) => {
+              // Staggered delay for each bar
+              const delayMs = 200 + idx * 220;
+              
+              return (
+                <Box key={step.label} sx={{ mb: 5 }}>
+                  {/* Label and Percentage Header */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "flex-end",
+                      mb: 1.5,
+                    }}
+                  >
+                    <Typography
                       sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        mb: 1,
                         fontFamily: '"Montserrat", sans-serif',
+                        fontSize: { xs: "0.9rem", md: "1rem" },
+                        fontWeight: 700,
+                        letterSpacing: "0.02em",
+                        color: "#2d3436",
+                        textTransform: "uppercase",
                       }}
                     >
-                      <Typography
-                        sx={{
-                          fontFamily: '"Montserrat", sans-serif',
-                          fontSize: { xs: "0.85rem", md: "1.05rem" },
-                          fontWeight: 600,
-                          background: "linear-gradient(90deg, #5b1c31, #8b2a46)",
-                          WebkitBackgroundClip: "text",
-                          WebkitTextFillColor: "transparent",
-                        }}
-                      >
-                        {step.label}
-                      </Typography>
+                      {step.label}
+                    </Typography>
 
-                      <Typography
-                        sx={{
-                          fontFamily: '"Montserrat", sans-serif',
-                          fontSize: "0.95rem",
-                          fontWeight: 700,
-                          color: "#444",
-                        }}
-                      >
-                        <AnimatedNumber value={step.number} delay={delayMs} />%
-                      </Typography>
-                    </Box>
+                    <Typography
+                      sx={{
+                        fontFamily: '"Montserrat", sans-serif',
+                        fontSize: "1.1rem",
+                        fontWeight: 800,
+                        background: "linear-gradient(135deg, #6366f1 0%, #d946ef 100%)",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                      }}
+                    >
+                      <AnimatedNumber value={step.number} delay={delayMs} />%
+                    </Typography>
+                  </Box>
 
-                    {/* Track */}
+                  {/* Modern Track Design */}
+                  <Box
+                    sx={{
+                      width: "100%",
+                      height: 12,
+                      backgroundColor: "#f0f0f5",
+                      borderRadius: "6px",
+                      position: "relative",
+                      // Subtle inner shadow for depth
+                      boxShadow: "inset 0 2px 4px rgba(0,0,0,0.05)",
+                      overflow: "hidden",
+                    }}
+                  >
+                    {/* Animated Fill Layer */}
                     <Box
                       sx={{
-                        width: "100%",
-                        height: { xs: 18, md: 20 },
-                        backgroundColor: "#e8e8ee",
-                        borderRadius: "9999px",
-                        overflow: "hidden",
+                        height: "100%",
+                        width: mounted ? `${step.number}%` : "0%",
+                        // Custom cubic-bezier for a "premium" elastic feel
+                        transition: `width 1.8s cubic-bezier(0.34, 1.56, 0.64, 1)`,
+                        transitionDelay: `${idx * 100}ms`,
+                        background: "linear-gradient(90deg, #6366f1 0%, #a855f7 50%, #ec4899 100%)",
+                        borderRadius: "6px",
                         position: "relative",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "flex-end",
+                        "&::after": {
+                          content: '""',
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          // Subtle shine effect
+                          background: "linear-gradient(transparent, rgba(255,255,255,0.15), transparent)",
+                        }
                       }}
                     >
-                      {/* Fill */}
+                      {/* Optional: Internal small glow dot at the tip */}
                       <Box
                         sx={{
-                          height: "100%",
-                          width: mounted ? `${step.number}%` : "0%",
-                          transition: "width 1.2s cubic-bezier(.22,.9,.34,1)",
-                          background:
-                            "linear-gradient(90deg, #a800ff 0%, #ff2aa6 60%, #ff6a6a 100%)",
-                          borderRadius: "9999px",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "flex-end",
-                          pr: { xs: 1, md: 1.5 },
-                          fontFamily: '"Montserrat", sans-serif',
+                          width: 6,
+                          height: 6,
+                          borderRadius: "50%",
+                          backgroundColor: "#fff",
+                          mr: 0.8,
+                          boxShadow: "0 0 10px #fff",
+                          opacity: 0.8
                         }}
-                      >
-                        <Box
-                          sx={{
-                            color: "#fff",
-                            fontWeight: 700,
-                            fontSize: { xs: "0.75rem", md: "0.9rem" },
-                            fontFamily: '"Montserrat", sans-serif',
-                          }}
-                        >
-                          <AnimatedNumber value={step.number} delay={delayMs} />%
-                        </Box>
-                      </Box>
+                      />
                     </Box>
                   </Box>
-                );
-              })}
-            </Box>
+                </Box>
+              );
+            })}
+          </Box>
           </Box>
 
           {/* RIGHT SIDE (Empty) */}

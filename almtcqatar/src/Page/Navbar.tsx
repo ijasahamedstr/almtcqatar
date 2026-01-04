@@ -25,47 +25,50 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 
-/* --- Pages --- */
+/* --- Configuration --- */
+const brandColor = "#5b1c31";
+
 const pages = [
   { label: 'Home', path: '/' },
   { label: 'Portfolio', path: '/Portfolio' },
-  { label: 'projects', path: '/projects' },
+  { label: 'Projects', path: '/projects' },
   { label: 'Expertise', path: '/Expertise' },
   { label: 'Contact Us', path: '/contact-us' },
- 
 ];
 
-/* --- Styled Search --- */
+/* --- Styled Components --- */
 const Search = styled('form')(({ theme }) => ({
   position: 'relative',
   borderRadius: '50px',
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': { backgroundColor: alpha(theme.palette.common.white, 0.25) },
-  border: `1px solid ${alpha(theme.palette.common.white, 0.3)}`,
-  flexShrink: 0,
+  backgroundColor: alpha(theme.palette.common.black, 0.05),
+  '&:hover': { backgroundColor: alpha(theme.palette.common.black, 0.08) },
+  border: `1px solid ${alpha(theme.palette.common.black, 0.1)}`,
+  display: 'flex',
+  alignItems: 'center',
+  marginLeft: theme.spacing(1),
+  width: '100%',
+  [theme.breakpoints.up('lg')]: { marginLeft: theme.spacing(2), width: 'auto' },
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  color: '#999',
+  color: brandColor,
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    paddingLeft: `calc(1em + ${theme.spacing(1)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
-    [theme.breakpoints.up('sm')]: { width: '18ch' },
-    [theme.breakpoints.up('md')]: { width: '25ch' },
-    borderRadius: '50px',
+    [theme.breakpoints.up('lg')]: { width: '12ch', '&:focus': { width: '20ch' } },
+    fontFamily: '"Montserrat", sans-serif',
+    fontSize: '0.85rem',
   },
 }));
 
@@ -74,17 +77,15 @@ export default function Navbar() {
   const [searchQuery, setSearchQuery] = React.useState('');
   const location = useLocation();
 
-  const isDesktop = useMediaQuery('(min-width:1024px)');
-  const isMarginTop57px = useMediaQuery(
-    '(min-width:768px) and (max-width:1024px), (min-width:820px) and (max-width:1180px), (min-width:853px) and (max-width:1280px), (min-width:912px) and (max-width:1368px)'
-  );
-  const isRemoveSearch = useMediaQuery('(width:1024px) and (height:1366px), (width:1024px) and (height:600px)');
+  /* --- Responsive Logic --- */
+  const isDesktop = useMediaQuery('(min-width:1100px)'); // Slightly wider to prevent menu crowding
+  const isMarginTopActive = useMediaQuery('(min-width:768px)');
+  const marginTopValue = isMarginTopActive ? '57px' : '0px';
 
   React.useEffect(() => {
     setDrawerOpen(false);
   }, [location]);
 
-  const marginTopValue = isDesktop || isMarginTop57px ? '57px' : '0px';
   const handleDrawerToggle = () => setDrawerOpen((prev) => !prev);
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value);
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -94,142 +95,176 @@ export default function Navbar() {
 
   return (
     <AppBar
-      position="static"
+      position="fixed" // Keeps nav available on scroll
+      elevation={0}
       sx={{
-        backgroundColor: '#D0D3D4',
-        color: 'black',
-        transition: 'margin-top 0.3s ease',
+        backgroundColor: '#ffffff',
+        top: 0,
+        transition: 'all 0.3s ease',
         marginTop: marginTopValue,
         width: '100%',
-        overflowX: 'hidden',
+        borderBottom: `1px solid ${alpha(brandColor, 0.1)}`,
+        zIndex: 1100,
       }}
     >
-      <Container maxWidth="xl" sx={{ px: { xs: 1, sm: 2, md: 3 } }}>
-        <Toolbar sx={{ justifyContent: 'space-between', py: 1, flexWrap: 'wrap' }}>
-          {/* Logo */}
-          <Box component={Link} to="/" sx={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters sx={{ justifyContent: 'space-between', py: { xs: 0.5, md: 1.5 } }}>
+          
+          {/* Logo Section */}
+          <Box 
+            component={Link} 
+            to="/" 
+            sx={{ 
+              textDecoration: 'none', 
+              display: 'flex', 
+              alignItems: 'center',
+              flexShrink: 0 
+            }}
+          >
             <Box
               component="img"
-              src="https://i.ibb.co/yn0gbKdZ/Gemini-Generated-Image-pua0mbpua0mbpua0-removebg-preview.png"
-              alt="Logo"
-              sx={{ maxHeight: { xs: 60, sm: 80, md: 100 }, width: 'auto' }}
+              src="https://i.ibb.co/cK5RvPG7/Gemini-Generated-Image-70xztx70xztx70xz-removebg-preview.png"
+              alt="MTC Logo"
+              sx={{ 
+                maxHeight: { xs: 45, sm: 60, md: 80, lg: 90 }, 
+                width: 'auto',
+                transition: '0.3s'
+              }}
             />
           </Box>
 
+          {/* DESKTOP NAVIGATION */}
           {isDesktop ? (
-            <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 2 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: { lg: 0.5, xl: 2 } }}>
               {pages.map(({ label, path }) => (
                 <Button
                   key={label}
                   component={Link}
                   to={path}
                   sx={{
-                    color: 'black',
-                    fontWeight: 500,
-                    textTransform: 'none',
-                    minWidth: 'auto',
+                    color: location.pathname === path ? brandColor : '#333',
+                    fontWeight: location.pathname === path ? 700 : 500,
+                    textTransform: 'uppercase',
+                    px: { lg: 1.2, xl: 2 },
+                    fontSize: { lg: '0.75rem', xl: '0.85rem' },
+                    letterSpacing: '0.5px',
+                    whiteSpace: 'nowrap',
                     fontFamily: '"Montserrat", sans-serif',
+                    '&:after': {
+                        content: '""',
+                        position: 'absolute',
+                        bottom: 5,
+                        left: '15%',
+                        width: location.pathname === path ? '70%' : '0%',
+                        height: '2px',
+                        backgroundColor: brandColor,
+                        transition: '0.3s',
+                    },
+                    '&:hover': { color: brandColor, bgcolor: 'transparent', '&:after': { width: '70%' } },
                   }}
                 >
                   {label}
                 </Button>
               ))}
 
-              {/* Search */}
-              {!isRemoveSearch && (
-                <Search onSubmit={handleSearchSubmit} sx={{ ml: 2, flexShrink: 1, minWidth: 120, maxWidth: 250 }}>
-                  <SearchIconWrapper>
-                    <SearchIcon />
-                  </SearchIconWrapper>
-                  <StyledInputBase placeholder="Search…" value={searchQuery} onChange={handleSearchChange} />
-                </Search>
-              )}
+              <Search onSubmit={handleSearchSubmit}>
+                <SearchIconWrapper>
+                  <SearchIcon fontSize="small" />
+                </SearchIconWrapper>
+                <StyledInputBase 
+                  placeholder="Search…" 
+                  value={searchQuery} 
+                  onChange={handleSearchChange} 
+                />
+              </Search>
             </Box>
           ) : (
-            <IconButton onClick={handleDrawerToggle} color="inherit">
-              <MenuIcon />
+            /* MOBILE/TABLET MENU ICON */
+            <IconButton 
+              onClick={handleDrawerToggle} 
+              sx={{ color: brandColor, p: 1 }}
+              aria-label="open drawer"
+            >
+              <MenuIcon sx={{ fontSize: { xs: 30, sm: 35 } }} />
             </IconButton>
           )}
         </Toolbar>
       </Container>
 
-      {/* Mobile Drawer */}
+      {/* --- Mobile Drawer --- */}
       <Drawer
-        anchor="left"
+        anchor="right"
         open={drawerOpen}
         onClose={handleDrawerToggle}
-        PaperProps={{ sx: { width: '80%', maxWidth: 280, py: 1 } }}
+        PaperProps={{ 
+          sx: { width: '85%', maxWidth: 320, bgcolor: '#fff' } 
+        }}
       >
-        <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
-          <Box sx={{ px: 2 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 1 }}>
-              <Box component={Link} to="/" onClick={handleDrawerToggle}>
-                <img
-                  src="https://i.ibb.co/yn0gbKdZ/Gemini-Generated-Image-pua0mbpua0mbpua0-removebg-preview.png"
-                  alt="Logo"
-                  style={{ maxHeight: 80, width: 'auto' }}
-                />
-              </Box>
-            </Box>
+        <Box sx={{ p: 4, textAlign: 'center', borderBottom: '1px solid #f0f0f0' }}>
+           <img
+            src="https://i.ibb.co/cK5RvPG7/Gemini-Generated-Image-70xztx70xztx70xz-removebg-preview.png"
+            alt="Logo"
+            style={{ maxHeight: 70, width: 'auto' }}
+          />
+        </Box>
 
-            <List>
-              {pages.map(({ label, path }) => (
-                <ListItemButton key={label} component={Link} to={path} onClick={handleDrawerToggle}>
-                  <ListItemText
-                    primary={label}
-                    primaryTypographyProps={{
-                      fontFamily: '"Montserrat", sans-serif',
-                      fontWeight: 500,
-                      fontSize: '15px',
-                    }}
-                  />
-                </ListItemButton>
-              ))}
-            </List>
-          </Box>
-
-          {/* Bottom Info */}
-          <Box
-            sx={{
-              borderTop: '1px solid #ddd',
-              py: 1,
-              textAlign: 'center',
-              bgcolor: '#f8f8f8',
-            }}
-          >
-            <Box
+        <List sx={{ pt: 2, px: 1 }}>
+          {pages.map(({ label, path }) => (
+            <ListItemButton 
+              key={label} 
+              component={Link} 
+              to={path} 
               sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                gap: 1,
-                alignItems: 'center',
-                flexWrap: 'wrap',
+                borderRadius: '8px',
+                mb: 0.5,
+                color: location.pathname === path ? brandColor : '#555',
+                bgcolor: location.pathname === path ? alpha(brandColor, 0.05) : 'transparent',
               }}
             >
-              <PhoneIcon sx={{ fontSize: 11 }} />
-              <Typography component="span" sx={{ fontFamily: '"Montserrat", sans-serif', fontSize: '11px' }}>
-                (+94) 672260200
-              </Typography>
-              <Typography component="span" sx={{ fontFamily: '"Montserrat", sans-serif', fontSize: '11px' }}>
-                |
-              </Typography>
-              <EmailIcon sx={{ fontSize: 11 }} />
-              <Typography component="span" sx={{ fontFamily: '"Montserrat", sans-serif', fontSize: '11px' }}>
-                info@brainiacs.edu.lk
-              </Typography>
-            </Box>
+              <ListItemText
+                primary={label}
+                primaryTypographyProps={{
+                  fontFamily: '"Montserrat", sans-serif',
+                  fontWeight: 600,
+                  fontSize: '0.9rem',
+                  textTransform: 'uppercase',
+                }}
+              />
+            </ListItemButton>
+          ))}
+        </List>
 
-            <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, mt: 0.5 }}>
-              {[FacebookIcon, InstagramIcon, TwitterIcon, LinkedInIcon].map((Icon, i) => (
-                <IconButton
-                  key={i}
-                  size="small"
-                  sx={{ bgcolor: '#fff', '&:hover': { bgcolor: '#000', color: '#fff' } }}
-                >
-                  <Icon fontSize="small" />
-                </IconButton>
-              ))}
-            </Box>
+        <Box sx={{ mt: 'auto', p: 3, bgcolor: '#fafafa' }}>
+          <Typography variant="overline" sx={{ color: '#999', fontWeight: 700, mb: 2, display: 'block',fontFamily: 'Montserrat' }}>
+            Contact Info
+          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
+            <PhoneIcon sx={{ fontSize: 18, color: brandColor }} />
+            <Typography sx={{ fontSize: '0.8rem', fontFamily: 'Montserrat', fontWeight: 500 }}>
+              (+94) 672260200
+            </Typography>
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 3 }}>
+            <EmailIcon sx={{ fontSize: 18, color: brandColor }} />
+            <Typography sx={{ fontSize: '0.8rem', fontFamily: 'Montserrat', fontWeight: 500 }}>
+              info@brainiacs.edu.lk
+            </Typography>
+          </Box>
+
+          <Box sx={{ display: 'flex', gap: 1.5 }}>
+            {[FacebookIcon, InstagramIcon, TwitterIcon, LinkedInIcon].map((Icon, i) => (
+              <IconButton 
+                key={i} 
+                size="small" 
+                sx={{ 
+                  color: brandColor, 
+                  border: `1px solid ${alpha(brandColor, 0.2)}`,
+                  '&:hover': { bgcolor: brandColor, color: 'white' } 
+                }}
+              >
+                <Icon fontSize="small" />
+              </IconButton>
+            ))}
           </Box>
         </Box>
       </Drawer>

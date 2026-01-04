@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
             >
               <Box
                 component="img"
-                src="https://i.ibb.co/yn0gbKdZ/Gemini-Generated-Image-pua0mbpua0mbpua0-removebg-preview.png"
+                src="https://i.ibb.co/cK5RvPG7/Gemini-Generated-Image-70xztx70xztx70xz-removebg-preview.png"
                 alt="Vater Logo"
                 sx={{
                   width: 180, // Increased logo size

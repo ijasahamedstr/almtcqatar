@@ -158,6 +158,8 @@ const ExpertiseAll: React.FC = () => {
                     fontWeight: 600,
                     letterSpacing: 0.5,
                     mb: 1,
+                    fontFamily: "'Montserrat', sans-serif",
+
                   }}
                 >
                   {item.title}

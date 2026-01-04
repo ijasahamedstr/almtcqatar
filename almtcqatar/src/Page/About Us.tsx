@@ -6,18 +6,18 @@ import { galleryImages } from "../Page/galleryData"; // ⬅️ adjust path if ne
 
 const managementMembers = [
   {
-    name: "Dr. John Smith",
-    title: "Chief Academic Officer",
+    name: "Ashraf Ali",
+    title: " General Manager",
     image:
-      "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?auto=format&fit=crop&w=800&q=80",
-    bio: "Oversees academic programs and drives innovation in teaching and learning.",
+      "https://i.ibb.co/HLbNpPmR/Gemini-Generated-Image-9nlulb9nlulb9nlu.png",
+    bio: "+974 7700 6456",
   },
   {
-    name: "Ms. Sarah Johnson",
-    title: "Director of Student Affairs",
+    name: "Jean Beanoit Mabire",
+    title: "Operations Manager",
     image:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80",
-    bio: "Ensures student engagement and fosters a vibrant campus community.",
+      "https://i.ibb.co/tprfntfn/Gemini-Generated-Image-4dalu4dalu4dalu4.png",
+    bio: "+974 5183 6081",
   },
 ];
 
@@ -325,9 +325,9 @@ const Aboutus: React.FC = () => {
           ))}
         </Box>
       </Container>
- <Box
+    <Box
       sx={{
-        backgroundColor: "#F8FAFC", // full-width background
+        backgroundColor: "#e8e3d6",
         py: 4, // vertical padding
       }}
     >

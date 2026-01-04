@@ -86,12 +86,21 @@ const Contactus: React.FC = () => {
 
   return (
     <>
-      {/* 📍 Google Map Section */}
+     <Box
+      sx={{
+        width: "100%",
+        minHeight: "100vh",
+        backgroundColor: "#e8e3d6",
+        pt: { xs: 2, md: 5 },
+        pb: { xs: 4, md: 8 }, // more padding at the bottom
+      }}
+        >
+           {/* 📍 Google Map Section */}
       <Box
         sx={{
           width: "100%",
           // Set a height that is still visible on mobile
-          height: { xs: "300px", md: "500px" }, 
+          height: { xs: "300px", md: "600px" }, 
           overflow: "hidden",
         }}
       >
@@ -285,6 +294,7 @@ const Contactus: React.FC = () => {
           </Box>
         </Box>
       </Container>
+    </Box>
     </>
   );
 };
